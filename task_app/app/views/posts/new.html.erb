@@ -1,0 +1,20 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">投稿する</h1>
+    <%= form_tag("/posts/create",{multipart: true}) do %>
+    <div class="form">
+      <div class="form-body">
+        <p>タスク内容</p>
+        <textarea name="content"></textarea>
+        <p>締切日</p>
+        <input name="due_date" type= "date" >
+        <p>担当者</p>
+        <input name="executor">
+        <p>タスク画像</p>
+        <input name="image" type = "file">
+        <input type= "submit" value="投稿">
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    @user = User.find_by(id: @post.user_id)
   end
 
   def new
@@ -20,8 +21,13 @@ class PostsController < ApplicationController
       content: params[:content],
       due_date: params[:due_date],
       executor: params[:executor],
-      user_id: @current_user.id
-      )
+      user_id: @current_user.id,
+      if params[:image]
+          @post.image_name = "#{@post.id}.jpg"
+          image = params[:image]
+          File.binwrite("public/post_images/#{@post.image_name}",image.read)
+      end
+    )
     @post.save
     redirect_to("/posts/index")
   end
@@ -35,8 +41,8 @@ class PostsController < ApplicationController
     @post.content = params[:content]
     @post.due_date = params[:due_date]
     @post.executor = params[:executor]
-    if　params[:image]
-        @post.image_name = "#{@post.id}.jpg" 
+    if params[:image]
+        @post.image_name = "#{@post.id}.jpg"
         image = params[:image]
         File.binwrite("public/post_images/#{@post.image_name}",image.read)
     end

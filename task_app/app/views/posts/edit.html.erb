@@ -4,7 +4,12 @@
     <%= form_tag("/posts/#{@post.id}/update") do %>
     <div class="form">
       <div class="form-body">
-        <textarea name="content"><%= @post.content %></textarea>
+        <p>タスク内容</p>
+          <textarea name="content"><%= @post.content %></textarea>
+        <p>締切日</p>
+          <input name="due_date" type= "date" value= "<%= @post.due_date %>" >
+        <p>担当者</p>
+          <input name="executor" value= "<%= @post.executor %>" >
         <input type="submit" value="保存">
       </div>
     </div>
